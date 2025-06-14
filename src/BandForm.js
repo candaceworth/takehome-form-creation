@@ -1,13 +1,40 @@
+import { useForm } from "react-hook-form";
+import QuantityInput from "./components/QuantityInput/QuantityInput";
+
 function BandForm({ band }) {
+  const { control, handleSubmit, watch } = useForm();
+
+  function onSubmit(data) {
+    console.log("form data", data);
+  }
+
+  const ticketCount = watch("tickets");
+
   return (
-    <div>
-      <h1>{band.name}</h1>
-      {band.ticketTypes.map((ticket) => (
-        <p>
-          {ticket.name} - {ticket.description}
-        </p>
-      ))}
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <h1>Select Tickets</h1>
+        <h2>{band.name}</h2>
+        <ul>
+          {band.ticketTypes.map((ticket) => (
+            <div key={ticket.name}>
+              <li>{ticket.name}</li>
+              <li> {ticket.description}</li>
+              <li>{`$ ${ticket.cost}`}</li>
+              <QuantityInput
+                name={`tickets.${ticket.name}`}
+                control={control}
+                rules={{
+                  min: { value: 0, message: "Minimum is 0" },
+                  max: { value: 15, message: "Maximum is 15" },
+                }}
+              />
+              <p>Total:</p>
+            </div>
+          ))}
+        </ul>
+      </div>
+    </form>
   );
 }
 
