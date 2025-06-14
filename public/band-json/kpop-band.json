@@ -3,8 +3,8 @@
   "id": "btess",
   "date": 1686675030000,
   "location": "6914 4th St NW, Washington, DC 20012",
-  "description_blurb": "<div><b>Come see the world sensation BTESS! ONE NIGHT ONLY!!!</b><p>You'll dance.</p><p>You'll sing.</p></p>You'll cry.</p><You'll feel all the feels.</p></div>",
-  "imgUrl": "https://placehold.co/600x400/f66b97/000000",
+  "description_blurb": "Come see the world sensation BTESS! ONE NIGHT ONLY!!! You'll dance. You'll sing. You'll cry. You'll feel all the feels.",
+  "imgUrl": "https://placehold.co/300x200/f66b97/000000",
   "ticketTypes": [
     {
       "type": "general",
