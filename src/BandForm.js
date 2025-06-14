@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import QuantityInput from "./components/QuantityInput/QuantityInput";
+import PaymentCard from "./components/PaymentCard/PaymentCard";
 
 function BandForm({ band }) {
   const { control, handleSubmit, watch } = useForm();
@@ -33,6 +34,7 @@ function BandForm({ band }) {
             </div>
           ))}
         </ul>
+        <PaymentCard />
       </div>
     </form>
   );
