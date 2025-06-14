@@ -1,14 +1,13 @@
-import skaBand from "./band-json/ska-band.json";
-import kpopBand from "./band-json/kpop-band.json";
-import punkBand from "./band-json/punk-band.json";
-
+import useGetData from "./hooks/useGetData";
 import BandForm from "./BandForm";
 
 function App() {
-  const bands = [skaBand, kpopBand, punkBand];
+  const { band, loading, error } = useGetData();
   return (
     <div className="App">
-      <BandForm band={bands[0]} />
+      {loading && <p>Loading...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {band.length > 0 && <BandForm band={band[0]} />}
     </div>
   );
 }
