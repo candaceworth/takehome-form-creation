@@ -6,17 +6,13 @@ import BandInfoCard from "./components/BandInfoCard/BandInfoCard";
 import "./BandForm.css";
 
 function BandForm({ band }) {
-  const { control, handleSubmit, watch } = useForm();
+  const { control, handleSubmit } = useForm();
 
   function onSubmit(data) {
-    console.log("form data", data);
+    const ticketCount = data.tickets;
+    const paymentData = data.paymentInfo;
+    console.log("form data", ticketCount, paymentData);
   }
-
-  const ticketCount = watch("tickets");
-  const paymentData = watch("paymentInfo");
-
-  console.log(paymentData);
-  console.log(ticketCount);
 
   return (
     <div className="container">
@@ -55,7 +51,7 @@ function BandForm({ band }) {
               justifySelf: "center",
             }}
           >
-            <Button variant="contained" onClick={onSubmit}>
+            <Button variant="contained" type="submit">
               Get Tickets
             </Button>
           </Box>

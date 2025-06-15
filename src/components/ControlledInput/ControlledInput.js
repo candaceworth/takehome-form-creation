@@ -5,7 +5,7 @@ const ControlledInput = ({ name, control, rules, ...props }) => {
   const {
     field,
     fieldState: { error },
-  } = useController({ name, control, rules });
+  } = useController({ name, control, rules, defaultValue: "" });
   return <TextField {...field} {...props} />;
 };
 
