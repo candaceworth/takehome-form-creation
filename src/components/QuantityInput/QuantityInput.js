@@ -16,7 +16,7 @@ const QuantityInput = ({ name, control, rules }) => {
         type="number"
         min="0"
         max="20"
-        style={{ width: "60px" }}
+        style={{ margin: "15px", width: "50px" }}
       />
     </>
   );

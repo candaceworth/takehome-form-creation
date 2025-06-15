@@ -1,8 +1,10 @@
 function BandInfoCard({ band }) {
   return (
-    <>
+    <div className="card-container">
       <ul>
-        <h1>{band.name}</h1>
+        <li>
+          <h1>{band.name}</h1>
+        </li>
         <li>
           {new Date(band.date).toLocaleDateString("en-US", {
             weekday: "long",
@@ -15,9 +17,9 @@ function BandInfoCard({ band }) {
         <li>
           <img src={band.imgUrl} />
         </li>
-        <p>{band.description_blurb}</p>
+        <p className="band-description">{band.description_blurb}</p>
       </ul>
-    </>
+    </div>
   );
 }
 

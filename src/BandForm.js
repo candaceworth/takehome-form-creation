@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import QuantityInput from "./components/QuantityInput/QuantityInput";
 import PaymentCard from "./components/PaymentCard/PaymentCard";
 import BandInfoCard from "./components/BandInfoCard/BandInfoCard";
+import "./BandForm.css";
 
 function BandForm({ band }) {
   const { control, handleSubmit, watch } = useForm();
@@ -13,34 +14,40 @@ function BandForm({ band }) {
   const ticketCount = watch("tickets");
 
   return (
-    <>
-      <BandInfoCard band={band} />
+    <div className="container">
+      <div className="band-info">
+        <BandInfoCard band={band} />
+      </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <h3>Select Tickets</h3>
+      <div className="band-form-wrapper">
+        <form onSubmit={handleSubmit(onSubmit)} className="band-form">
           <ul>
+            <h3>Select Tickets</h3>
             {band.ticketTypes.map((ticket) => (
-              <div key={ticket.name}>
-                <li>{ticket.name}</li>
-                <li> {ticket.description}</li>
-                <li>{`$ ${ticket.cost}`}</li>
-                <QuantityInput
-                  name={`tickets.${ticket.name}`}
-                  control={control}
-                  rules={{
-                    min: { value: 0, message: "Minimum is 0" },
-                    max: { value: 15, message: "Maximum is 15" },
-                  }}
-                />
-                <p>Total:</p>
-              </div>
+              <li key={ticket.name}>
+                <div className="ticket-types">
+                  <div className="ticket-details">
+                    <p>{ticket.name}</p>
+                    <p> {ticket.description}</p>
+                    <p>{`$ ${ticket.cost}`}</p>
+                  </div>
+                  <QuantityInput
+                    name={`tickets.${ticket.name}`}
+                    control={control}
+                    rules={{
+                      min: { value: 0, message: "Minimum is 0" },
+                      max: { value: 15, message: "Maximum is 15" },
+                    }}
+                  />
+                </div>
+              </li>
             ))}
           </ul>
           <PaymentCard />
-        </div>
-      </form>
-    </>
+          <button>Submit</button>
+        </form>
+      </div>
+    </div>
   );
 }
 

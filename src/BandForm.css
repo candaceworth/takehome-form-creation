@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.band-info,
+.band-form {
+  padding: 0;
+  margin: 0;
+}
+
+.band-form-wrapper {
+  align-self: flex-start;
+  margin-top: 170px;
+}
+
+.band-info,
+.band-form {
+  flex: 1 1 400px;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.ticket-types {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.ticket-details {
+  flex: 1;
+  max-width: 290px;
+  overflow-wrap: break-word;
+}
+
+.band-description {
+  width: 300px;
+}
+
+.card-container li {
+  padding: 8px;
+}
+
+input[type="number"] {
+  margin: 0;
+  width: 60px;
+}
+
+li {
+  list-style-type: none;
+}
+
+@media screen and (max-width: 899px) {
+  .band-form-wrapper {
+    margin-top: 0px;
+  }
+}
