@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Button, Box } from "@mui/material";
 import QuantityInput from "./components/QuantityInput/QuantityInput";
 import PaymentCard from "./components/PaymentCard/PaymentCard";
 import BandInfoCard from "./components/BandInfoCard/BandInfoCard";
@@ -12,6 +13,10 @@ function BandForm({ band }) {
   }
 
   const ticketCount = watch("tickets");
+  const paymentData = watch("paymentInfo");
+
+  console.log(paymentData);
+  console.log(ticketCount);
 
   return (
     <div className="container">
@@ -43,8 +48,17 @@ function BandForm({ band }) {
               </li>
             ))}
           </ul>
-          <PaymentCard />
-          <button>Submit</button>
+          <PaymentCard name="paymentInfo" control={control} />
+          <Box
+            sx={{
+              gridColumn: "span 2",
+              justifySelf: "center",
+            }}
+          >
+            <Button variant="contained" onClick={onSubmit}>
+              Get Tickets
+            </Button>
+          </Box>
         </form>
       </div>
     </div>
