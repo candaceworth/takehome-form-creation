@@ -1,17 +1,26 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Box } from "@mui/material";
 import QuantityInput from "./components/QuantityInput/QuantityInput";
 import PaymentCard from "./components/PaymentCard/PaymentCard";
 import BandInfoCard from "./components/BandInfoCard/BandInfoCard";
+import getSelectedTicketsWithPrices from "./utils/calculatesTickets";
 import "./BandForm.css";
 
 function BandForm({ band }) {
   const { control, handleSubmit } = useForm();
+  const [total, SetTotal] = useState(null);
 
   function onSubmit(data) {
-    const ticketCount = data.tickets;
     const paymentData = data.paymentInfo;
-    console.log("form data", ticketCount, paymentData);
+
+    const selectedWithPrice = getSelectedTicketsWithPrices(
+      band.ticketTypes,
+      data.tickets
+    );
+
+    SetTotal(selectedWithPrice.totalCost);
+    console.log("prices", selectedWithPrice, "payment data", paymentData);
   }
 
   return (
@@ -43,8 +52,12 @@ function BandForm({ band }) {
                 </div>
               </li>
             ))}
+            <p>
+              TOTAL: <span>{total}</span>
+            </p>
           </ul>
           <PaymentCard name="paymentInfo" control={control} />
+
           <Box
             sx={{
               gridColumn: "span 2",
