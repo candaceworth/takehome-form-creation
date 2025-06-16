@@ -45,7 +45,10 @@ function BandForm({ band }) {
                     name={`tickets.${ticket.name}`}
                     control={control}
                     rules={{
-                      min: { value: 0, message: "Minimum is 0" },
+                      min: {
+                        value: 1,
+                        message: "Please select at least 1 ticket",
+                      },
                       max: { value: 15, message: "Maximum is 15" },
                     }}
                   />

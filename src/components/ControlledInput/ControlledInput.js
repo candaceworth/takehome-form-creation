@@ -6,7 +6,14 @@ const ControlledInput = ({ name, control, rules, ...props }) => {
     field,
     fieldState: { error },
   } = useController({ name, control, rules, defaultValue: "" });
-  return <TextField {...field} {...props} />;
+  return (
+    <TextField
+      {...field}
+      {...props}
+      error={!!error}
+      helperText={error ? error.message : ""}
+    />
+  );
 };
 
 export default ControlledInput;

@@ -1,7 +1,10 @@
 import { useController } from "react-hook-form";
 
 const QuantityInput = ({ name, control, rules }) => {
-  const { field, fieldState } = useController({
+  const {
+    field,
+    fieldState: { error },
+  } = useController({
     name,
     control,
     rules,
@@ -16,8 +19,12 @@ const QuantityInput = ({ name, control, rules }) => {
         type="number"
         min="0"
         max="20"
-        style={{ margin: "15px", width: "50px" }}
+        style={{
+          margin: "15px",
+          width: "50px",
+        }}
       />
+      {error && <p style={{ color: "red" }}>{error.message}</p>}
     </>
   );
 };
