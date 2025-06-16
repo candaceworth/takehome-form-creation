@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Box } from "@mui/material";
 import QuantityInput from "./components/QuantityInput/QuantityInput";
@@ -8,10 +8,26 @@ import getSelectedTicketsWithPrices from "./utils/calculatesTickets";
 import "./BandForm.css";
 
 function BandForm({ band }) {
-  const { control, handleSubmit } = useForm();
-  const [total, SetTotal] = useState(null);
+  const { control, watch, handleSubmit, formState } = useForm();
+
+  const watchedTickets = watch("tickets");
+
+  const [total, setTotal] = useState(0);
+
+  // Ensures the total is updated as user selects a ticket
+  useEffect(() => {
+    const selectedWithPrice = getSelectedTicketsWithPrices(
+      band.ticketTypes,
+      watchedTickets
+    );
+
+    setTotal(selectedWithPrice.totalCost || 0);
+  }, [watchedTickets, band.ticketTypes]);
 
   function onSubmit(data) {
+    /* If validation passes, proceed with form submission and 
+    collect tickets with prices and total cost */
+
     const paymentData = data.paymentInfo;
 
     const selectedWithPrice = getSelectedTicketsWithPrices(
@@ -19,7 +35,8 @@ function BandForm({ band }) {
       data.tickets
     );
 
-    SetTotal(selectedWithPrice.totalCost);
+    setTotal(selectedWithPrice.totalCost || 0);
+
     console.log("prices", selectedWithPrice, "payment data", paymentData);
   }
 
@@ -33,7 +50,7 @@ function BandForm({ band }) {
         <form onSubmit={handleSubmit(onSubmit)} className="band-form">
           <ul>
             <h3>Select Tickets</h3>
-            {band.ticketTypes.map((ticket) => (
+            {band.ticketTypes.map((ticket, index) => (
               <li key={ticket.name}>
                 <div className="ticket-types">
                   <div className="ticket-details">
@@ -44,10 +61,12 @@ function BandForm({ band }) {
                   <QuantityInput
                     name={`tickets.${ticket.name}`}
                     control={control}
+                    allTicketsWatch={watchedTickets}
+                    isFirstTicket={index === 0}
                     rules={{
                       min: {
-                        value: 1,
-                        message: "Please select at least 1 ticket",
+                        value: 0,
+                        message: "Quantity must be greater than 0",
                       },
                       max: { value: 15, message: "Maximum is 15" },
                     }}
@@ -55,6 +74,11 @@ function BandForm({ band }) {
                 </div>
               </li>
             ))}
+            {formState.errors.tickets && (
+              <p style={{ color: "red", marginTop: "8px" }}>
+                {formState.errors.tickets.message}
+              </p>
+            )}
             <p>
               TOTAL: <span>{total}</span>
             </p>

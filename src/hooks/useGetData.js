@@ -23,7 +23,8 @@ function useGetData() {
           const data = await response.json();
           allData.push(data);
         } catch (error) {
-          setError(error.message);
+          console.log(error.message);
+          setError("Unable to get data");
         }
       }
       setBand(allData);

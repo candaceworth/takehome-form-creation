@@ -1,13 +1,32 @@
 import { useController } from "react-hook-form";
 
-const QuantityInput = ({ name, control, rules }) => {
+const QuantityInput = ({
+  name,
+  control,
+  rules,
+  isFirstTicket,
+  allTicketsWatch,
+}) => {
   const {
     field,
     fieldState: { error },
   } = useController({
     name,
     control,
-    rules,
+    rules: {
+      ...rules,
+      ...(isFirstTicket && {
+        validate: {
+          atLeastOneTicket: () => {
+            if (!allTicketsWatch) return true;
+
+            const ticketValues = Object.values(allTicketsWatch || {});
+            const hasOneTicket = ticketValues.some((value) => value > 0);
+            return hasOneTicket || "Please select at least one ticket";
+          },
+        },
+      }),
+    },
     defaultValue: 0,
   });
 
