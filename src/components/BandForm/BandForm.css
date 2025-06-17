@@ -54,6 +54,14 @@ li {
   list-style-type: none;
 }
 
+.border {
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
 @media screen and (max-width: 899px) {
   .band-form-wrapper {
     margin-top: 0px;

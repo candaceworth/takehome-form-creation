@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+/* Moved the band JSON files to the public folder so they can be accessed via fetch. */
+
 function useGetData() {
   const [band, setBand] = useState([]);
   const [loading, setLoading] = useState(true);

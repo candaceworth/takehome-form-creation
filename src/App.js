@@ -1,5 +1,5 @@
 import useGetData from "./hooks/useGetData";
-import BandForm from "./BandForm";
+import BandForm from "./components/BandForm/BandForm";
 
 function App() {
   const { band, loading, error } = useGetData();

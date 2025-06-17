@@ -1,23 +1,29 @@
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { Button, Box } from "@mui/material";
-import QuantityInput from "./components/QuantityInput/QuantityInput";
-import PaymentCard from "./components/PaymentCard/PaymentCard";
-import BandInfoCard from "./components/BandInfoCard/BandInfoCard";
-import getSelectedTicketsWithPrices from "./utils/calculatesTickets";
+import QuantityInput from "../QuantityInput/QuantityInput";
+import PaymentCard from "../PaymentCard/PaymentCard";
+import BandInfoCard from "../BandInfoCard/BandInfoCard";
+import getSelectedTicketsWithPrices from "../../utils/calculatesTickets";
 import "./BandForm.css";
 
 function BandForm({ band }) {
-  const { control, watch, handleSubmit, formState } = useForm();
+  const { control, handleSubmit, formState } = useForm();
 
-  const watchedTickets = watch("tickets");
+  const watchedTickets = useWatch({
+    control,
+    name: "tickets",
+    defaultValue: {},
+  });
 
   const [total, setTotal] = useState(0);
 
   // Ensures the total is updated as user selects a ticket
   useEffect(() => {
-    const selectedWithPrice =
-      getSelectedTicketsWithPrices(band.ticketTypes, watchedTickets) || {};
+    const selectedWithPrice = getSelectedTicketsWithPrices(
+      band.ticketTypes,
+      watchedTickets
+    );
 
     setTotal(selectedWithPrice.totalCost || 0);
   }, [watchedTickets, band.ticketTypes]);
@@ -30,7 +36,7 @@ function BandForm({ band }) {
 
     const selectedWithPrice = getSelectedTicketsWithPrices(
       band.ticketTypes,
-      data.tickets || {}
+      data.tickets
     );
 
     setTotal(selectedWithPrice.totalCost || 0);
@@ -55,6 +61,7 @@ function BandForm({ band }) {
                     <p>{ticket.name}</p>
                     <p> {ticket.description}</p>
                     <p>{`$ ${ticket.cost}`}</p>
+                    <hr className="border" />
                   </div>
                   <QuantityInput
                     name={`tickets.${ticket.name}`}
@@ -89,7 +96,11 @@ function BandForm({ band }) {
               justifySelf: "center",
             }}
           >
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              style={{ margin: "20px" }}
+              type="submit"
+            >
               Get Tickets
             </Button>
           </Box>

@@ -1,6 +1,19 @@
 import { Card, Container } from "@mui/material";
 import ControlledInput from "../ControlledInput/ControlledInput";
 
+/**
+ * PaymentCard is a reusable component for rendering a styled credit card form.
+ *
+ * Renders a set of controlled inputs for collecting payment and billing details,
+ * such as name, address, card number, expiration date, and CVC.
+ *
+ * Applies validation rules for required fields and proper formatting using react-hook-form.
+ *
+ * Props:
+ * - name: base path for each input field (e.g., 'paymentInfo'), used to scope form values.
+ * - control: react-hook-form's control object used to register inputs.
+ */
+
 const PaymentCard = ({ name, control }) => {
   const paymentInfo = [
     {
@@ -83,7 +96,12 @@ const PaymentCard = ({ name, control }) => {
   ];
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
+    <Container
+      maxWidth="md"
+      sx={{ mt: 4 }}
+      component="section"
+      aria-labelledby="payment-heading"
+    >
       <Card
         sx={{
           display: "grid",

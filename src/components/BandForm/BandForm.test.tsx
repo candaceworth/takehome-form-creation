@@ -2,17 +2,17 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import BandForm from "./BandForm";
-import mockCalculateTickets from "./utils/calculatesTickets";
+import mockCalculateTickets from "../../utils/calculatesTickets";
 
 // Mock Components
-jest.mock("./components/QuantityInput/QuantityInput", () => ({
+jest.mock("../QuantityInput/QuantityInput", () => ({
   __esModule: true,
   default: ({ name }) => (
     <div data-testid={`quantity-input-tickets.${name}`}>Quantity Input</div>
   ),
 }));
 
-jest.mock("./components/PaymentCard/PaymentCard", () => ({
+jest.mock("../PaymentCard/PaymentCard", () => ({
   __esModule: true,
   default: ({ name }) => (
     <div data-testid={`payment-card-${name}`}>Payment Card</div>
@@ -20,7 +20,7 @@ jest.mock("./components/PaymentCard/PaymentCard", () => ({
 }));
 
 // Mock Utility Functions
-jest.mock("./utils/calculatesTickets", () => ({
+jest.mock("../../utils/calculatesTickets", () => ({
   __esModule: true,
   default: jest.fn(() => ({
     totalCost: 50,
@@ -45,6 +45,10 @@ jest.mock("react-hook-form", () => ({
     },
     formState: { errors: {} },
   }),
+  useWatch: jest.fn(() => ({
+    "General Admission": 2,
+    VIP: 1,
+  })),
 }));
 
 describe("BandForm Component", () => {

@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { useForm, FormProvider } from "react-hook-form";
 import QuantityInput from "./QuantityInput";
 
+// Wrapper component to test QuantityInput with React Hook Form context and default ticket values
 function QuantityInputWrapper() {
   const methods = useForm({
     mode: "onSubmit",
@@ -14,9 +15,12 @@ function QuantityInputWrapper() {
   });
 
   const ticketName = "General Admission";
+
+  // Watch changes to the entire "tickets" object to enable dynamic updates
   const watchedTickets = methods.watch("tickets");
 
   return (
+    // Provide form context to all child components using FormProvider
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(() => {})}>
         <QuantityInput
