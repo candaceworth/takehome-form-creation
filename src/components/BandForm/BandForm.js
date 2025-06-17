@@ -41,7 +41,12 @@ function BandForm({ band }) {
 
     setTotal(selectedWithPrice.totalCost || 0);
 
-    console.log("prices", selectedWithPrice, "payment data", paymentData);
+    console.log(
+      "Selected Tickets with Prices:",
+      selectedWithPrice,
+      "Payment Data:",
+      paymentData
+    );
   }
 
   return (
@@ -85,7 +90,7 @@ function BandForm({ band }) {
               </p>
             )}
             <p>
-              TOTAL: <span>{total}</span>
+              TOTAL: $<span>{total}</span>
             </p>
           </ul>
           <PaymentCard name="paymentInfo" control={control} />

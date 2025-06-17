@@ -66,4 +66,16 @@ li {
   .band-form-wrapper {
     margin-top: 0px;
   }
+
+  .ticket-types {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  input[type="number"] {
+    order: -1;
+    width: 100%;
+    max-width: 100px;
+    transform: translateX(-15px);
+  }
 }

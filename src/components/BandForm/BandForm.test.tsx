@@ -92,7 +92,7 @@ describe("BandForm Component", () => {
       expect(
         screen.getByTestId("payment-card-paymentInfo")
       ).toBeInTheDocument();
-      expect(screen.getByText("TOTAL:")).toBeInTheDocument();
+      expect(screen.getByText("TOTAL: $")).toBeInTheDocument();
     });
   });
 
@@ -114,12 +114,12 @@ describe("BandForm Component", () => {
       fireEvent.click(screen.getByRole("button", { name: /get tickets/i }));
 
       expect(consoleSpy).toHaveBeenCalledWith(
-        "prices",
+        "Selected Tickets with Prices:",
         expect.objectContaining({
           totalCost: 50,
           selectedTickets: {},
         }),
-        "payment data",
+        "Payment Data:",
         expect.objectContaining({
           cardNumber: "1234567890123456",
           expiryDate: "12/25",

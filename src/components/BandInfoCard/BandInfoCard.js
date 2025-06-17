@@ -15,7 +15,7 @@ function BandInfoCard({ band }) {
         </li>
         <li>{band.location}</li>
         <li>
-          <img src={band.imgUrl} />
+          <img src={band.imgUrl} alt={`Photo of ${band.name}`} />
         </li>
         <p className="band-description">{band.description_blurb}</p>
       </ul>
