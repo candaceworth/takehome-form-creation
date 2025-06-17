@@ -14,7 +14,7 @@ const PaymentCard = ({ name, control }) => {
       label: "Last Name",
       id: "last-name",
       placeholder: "Last Name",
-      validation: { required: "First name required" },
+      validation: { required: "Last name required" },
       gridColumnSpan: 1,
     },
     {
@@ -65,9 +65,9 @@ const PaymentCard = ({ name, control }) => {
     {
       label: "CVC",
       id: "card-verification",
-      placeholder: "CVV",
+      placeholder: "CVC",
       validation: {
-        required: "CVV required",
+        required: "CVC required",
         pattern: {
           value: /^\d{3,4}$/,
           message: "3-4 digits required",

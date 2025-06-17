@@ -33,8 +33,8 @@ const QuantityInput = ({
   return (
     <>
       <input
-        name="tickets"
         {...field}
+        aria-label={name}
         type="number"
         min="0"
         max="20"

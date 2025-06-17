@@ -16,10 +16,8 @@ function BandForm({ band }) {
 
   // Ensures the total is updated as user selects a ticket
   useEffect(() => {
-    const selectedWithPrice = getSelectedTicketsWithPrices(
-      band.ticketTypes,
-      watchedTickets
-    );
+    const selectedWithPrice =
+      getSelectedTicketsWithPrices(band.ticketTypes, watchedTickets) || {};
 
     setTotal(selectedWithPrice.totalCost || 0);
   }, [watchedTickets, band.ticketTypes]);
@@ -32,7 +30,7 @@ function BandForm({ band }) {
 
     const selectedWithPrice = getSelectedTicketsWithPrices(
       band.ticketTypes,
-      data.tickets
+      data.tickets || {}
     );
 
     setTotal(selectedWithPrice.totalCost || 0);
