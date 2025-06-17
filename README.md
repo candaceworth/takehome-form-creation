@@ -39,6 +39,8 @@ src/utils/: Helper functions for processing tickets and prices.
 
 ### Notes:
 
+When the "Get Tickets" button is clicked, the form data will be sent to console.log() under the variable names selectedWithPrice and paymentData.
+
 JSON data files were moved to the public folder to enable fetching with fetch() in the browser.
 
 Validation rules are applied via React Hook Form’s rules prop to ensure good UX and data integrity.
