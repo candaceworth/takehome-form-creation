@@ -49,3 +49,8 @@ The form leverages MUI’s TextField components wrapped in ControlledInput for s
 
 The BandForm, QuantityInput PaymentCard components include unit test. 
 
+
+### Post Submission Accessibility Note
+
+For fully compliant production code, I would ensure all inputs are properly labeled using native HTML labels, and enhance accessibility further with ARIA roles where necessary (e.g., aria-live, aria-describedby, etc.) for dynamic content and assistive technologies. Accessibility and testing are both important to me, and I wanted to reflect that in this take-home without going significantly over the suggested time guideline. Given more time, I would have expanded these areas further to better reflect the level of care I apply in production.
+
